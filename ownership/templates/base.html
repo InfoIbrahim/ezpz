@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Web Terminal</title>
+    <!-- Replace this with the path to your local CSS file -->
+    <link rel="stylesheet" href="/path/to/your/terminal.css"> <!-- Update this path -->
+</head>
+<body>
+    <div id="terminal">
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+    <!-- Form to submit terminal commands -->
+    <form method="POST" action="{% block form_action %}{% endblock %}">
+        {% csrf_token %}
+        <input type="text" name="command" placeholder="Type your command..." autofocus required />
+        <button type="submit" style="display: none;"></button>
+    </form>
+
+    <!-- Replace this with the path to your local JS file -->
+    <script src="/path/to/your/terminal.js"></script> <!-- Update this path -->
+</body>
+</html>
+

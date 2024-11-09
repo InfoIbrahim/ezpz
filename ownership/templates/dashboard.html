@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <!-- Direct path to the CSS file -->
+    <link rel="stylesheet" href="/path/to/your/css/dashboard.css"> <!-- Replace this with the actual path -->
+</head>
+<body>
+    <h1>Welcome, {{ user.name }}</h1>
+
+    <p><strong>Your IHB Ownership</strong></p>
+    <ul>
+        {% for ownership in user.IHB_ownership %}
+            <li>IHB {{ ownership.IHB_number }}: {{ ownership.percentage }}%</li>
+        {% endfor %}
+    </ul>
+
+    <p><strong>Your Recent Transactions</strong></p>
+    <ul>
+        {% for transaction in user.transaction_history %}
+            <li>{{ transaction.sender }} transferred {{ transaction.amount }} to {{ transaction.recipient }} for IHB {{ transaction.IHB_number }}</li>
+        {% endfor %}
+    </ul>
+
+    <p><strong>Balance Information</strong></p>
+    <form method="post">
+        {% csrf_token %}
+        <label for="IHB_number">IHB Number:</label>
+        <input type="number" id="IHB_number" name="IHB_number" required><br><br>
+
+        <label for="command">Enter Command (balance / transfer / logout):</label>
+        <input type="text" id="command" name="command" required><br><br>
+
+        <button type="submit">Execute Command</button>
+    </form>
+
+    <!-- Transfer Form Section -->
+    <h2>Transfer Ownership</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="recipient">Recipient:</label>
+        <input type="text" id="recipient" name="recipient" value="{{ transfer_form_data.recipient }}" required><br><br>
+
+        <label for="IHB_number">IHB Number:</label>
+        <input type="number" id="IHB_number" name="IHB_number" value="{{ transfer_form_data.IHB_number }}" required><br><br>
+
+        <label for="amount">Amount (USD):</label>
+        <input type="number" id="amount" name="amount" value="{{ transfer_form_data.amount }}" required><br><br>
+
+        <button type="submit" name="command" value="transfer">Transfer</button>
+    </form>
+
+    {% if terminal_output %}
+        <div>{{ terminal_output }}</div>
+    {% endif %}
+    
+    <br>
+    <a href="{% url 'logout' %}">Logout</a>
+
+    <!-- Direct path to the JavaScript file -->
+    <script src="/path/to/your/js/dashboard.js"></script> <!-- Replace this with the actual path -->
+</body>
+</html>

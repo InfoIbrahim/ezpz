@@ -1,0 +1,35 @@
+
+{% extends 'base.html' %} 
+
+{% block content %}
+  <h1>NFC Data Ledger</h1>
+  
+  {% if nfc_data %}
+    <table border="1" cellpadding="10" cellspacing="0">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in nfc_data %}
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.location }}</td>
+            <td>{{ item.timestamp }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="4">No NFC data available.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No NFC data to display.</p>
+  {% endif %}
+{% endblock %}

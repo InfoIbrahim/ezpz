@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Direct link to external CSS file -->
+    <link rel="stylesheet" href="/path/to/your/css/login.css"> <!-- Replace with actual path -->
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <button type="submit">Log in</button>
+        </form>
+    </div>
+
+    <!-- Direct link to external JS file -->
+    <script src="/path/to/your/js/login.js"></script> <!-- Replace with actual path -->
+</body>
+</html>
